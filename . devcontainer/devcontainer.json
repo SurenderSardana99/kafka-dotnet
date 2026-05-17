@@ -1,1 +1,41 @@
+{
+  "name": "Kafka .NET Core",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "kafka",
+  "workspaceFolder": "/workspace",
+  "overrideCommand": true,
+
+  "image": "mcr.microsoft.com/dotnet/sdk:8.0",
+
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "8.0"
+    }
+  },
+
+  "forwardPorts": [5000, 5001, 9092, 8080],
+
+  "portsAttributes": {
+    "5000": { "label": "Kafka API (HTTP)" },
+    "5001": { "label": "Kafka API (HTTPS)" },
+    "9092": { "label": "Kafka Broker" },
+    "8080": { "label": "Kafka UI" }
+  },
+
+  "postCreateCommand": "cd KafkaDemo && dotnet restore",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "humao.rest-client"
+      ],
+      "settings": {
+        "dotnet.defaultSolution": "KafkaDemo/KafkaDemo.sln"
+      }
+    }
+  }
+}
 
